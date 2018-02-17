@@ -18,3 +18,6 @@ const code5 = readFile('code5.js');
 const result5 = fnsb(code5);
 const code6 = readFile('code6.js');
 const result6 = fnsb(code6);
+const code7 = readFile('code7.js');
+const result7 = fnsb(code7);
+console.log(result7);

@@ -2,7 +2,12 @@ const acorn = require('acorn');
 const walk = require('acorn/dist/walk');
 
 const main = function (code = '', options = {}) {
-    const ast = acorn.parseExpressionAt(code, 0, options);
+    let ast;
+    try {
+        ast = acorn.parseExpressionAt(code, 0, options);
+    } catch (e) {
+        ast = acorn.parse(code, options);
+    }
     walk.simple(ast, {
         FunctionExpression(node) {
             debugger
@@ -11,6 +16,15 @@ const main = function (code = '', options = {}) {
             debugger
         },
         Function(node) {
+            debugger
+        },
+        ObjectPattern(node) {
+            debugger
+        },
+        Identifier(node) {
+            debugger
+        },
+        VariableDeclaration(node) {
             debugger
         }
     });
