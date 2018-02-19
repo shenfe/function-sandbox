@@ -4,28 +4,34 @@ const walk = require('acorn/dist/walk');
 const main = function (code = '', options = {}) {
     let ast;
     try {
-        ast = acorn.parseExpressionAt(code, 0, options);
-    } catch (e) {
         ast = acorn.parse(code, options);
+    } catch (e) {
+        ast = acorn.parseExpressionAt(code, 0, options);
     }
     walk.simple(ast, {
+        FunctionDeclaration(node) {
+            // debugger
+        },
         FunctionExpression(node) {
-            debugger
+            // debugger
         },
         ArrowFunctionExpression(node) {
-            debugger
+            // debugger
         },
         Function(node) {
             debugger
         },
         ObjectPattern(node) {
-            debugger
+            // debugger
+        },
+        RestElement(node) {
+            // debugger
         },
         Identifier(node) {
-            debugger
+            // debugger
         },
         VariableDeclaration(node) {
-            debugger
+            // debugger
         }
     });
 };
