@@ -4,5 +4,30 @@
     "escope": "^3.6.0",
     "esprima": "^4.0.0",
     "estraverse": "^4.2.0"
-  }
+  },
+  "name": "function-sandbox",
+  "description": "Function sandbox, blocking variables spoiling.",
+  "version": "0.1.0",
+  "main": "src/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node ./test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shenfe/function-sandbox.git"
+  },
+  "keywords": [
+    "function-sandbox",
+    "security"
+  ],
+  "author": "hengwu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shenfe/function-sandbox/issues"
+  },
+  "homepage": "https://github.com/shenfe/function-sandbox#readme"
 }
