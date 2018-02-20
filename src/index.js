@@ -32,6 +32,9 @@ const main = function (code = '', options = {}) {
         },
         VariableDeclaration(node) {
             // debugger
+        },
+        CatchClause(node) {
+            // debugger
         }
     });
 };
