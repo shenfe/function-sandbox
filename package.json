@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "acorn": "^5.4.1"
+    "escodegen": "^1.9.0",
+    "escope": "^3.6.0",
+    "esprima": "^4.0.0",
+    "estraverse": "^4.2.0"
   }
 }
