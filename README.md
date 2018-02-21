@@ -1,6 +1,6 @@
 # function-sandbox
 
-Make a sandbox for a function, blocking global variables.
+Make a sandbox for a function, blocking outer-scoped variables and dangerious operations such as `eval`, `new Function()`.
 
 ## Input/Output
 
