@@ -7,7 +7,7 @@
   },
   "name": "function-sandbox",
   "description": "Function sandbox, blocking variables spoiling.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "src/index.js",
   "directories": {
     "test": "test"

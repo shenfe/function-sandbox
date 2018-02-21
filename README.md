@@ -26,14 +26,14 @@ const fnsb = require('function-sandbox');
 let f1 = function () {
     a = b + 1;
     console.log(c);
-    function inner() {
+    function f() {
         console.log(d);
         console.log(e);
         console.log(window);
         console.log(global);
     }
     var d = 1;
-    return inner();
+    return f();
 };
 
 let f2 = fnsb(f1, true); // `f2` is function
@@ -48,14 +48,14 @@ Now `f3` is such a **string** of a function:
     var a, b, c, e;
     a = b + 1;
     console.log(c);
-    function inner() {
+    function f() {
         console.log(d);
         console.log(e);
         console.log(window);
         console.log(global);
     }
     var d = 1;
-    return inner();
+    return f();
 }); })()"
 ```
 

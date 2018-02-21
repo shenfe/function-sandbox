@@ -1,7 +1,7 @@
 function () {
     a = b + 1;
     console.log(c);
-    function inner() {
+    function f() {
         console.log(d);
         console.log(e);
         console.log(window);
@@ -9,5 +9,5 @@ function () {
         // eval('console.log("using eval")');
     }
     var d = 1;
-    return inner();
+    return f();
 }
