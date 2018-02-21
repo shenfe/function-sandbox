@@ -31,6 +31,7 @@ let f1 = function () {
         console.log(e);
         console.log(window);
         console.log(global);
+        eval('console.log("using eval")');
     }
     var d = 1;
     return f();
@@ -53,6 +54,7 @@ Now `f3` is such a **string** of a function:
         console.log(e);
         console.log(window);
         console.log(global);
+        eval('console.log("using eval")');
     }
     var d = 1;
     return f();

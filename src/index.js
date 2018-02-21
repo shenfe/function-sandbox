@@ -34,7 +34,9 @@ const main = function (code = '', options = {}) {
         ast = esprima.parse('const targetFn = ' + code);
     }
 
-    const scopeManager = escope.analyze(ast);
+    const scopeManager = escope.analyze(ast, {
+        ignoreEval: true
+    });
     let currentScope = scopeManager.acquire(ast);   // global scope
     let rootFunction;
     const varsThrough = {};
