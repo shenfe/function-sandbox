@@ -1,4 +1,4 @@
-function () {
+function (f) {
     a = b + 1;
     console.log(c);
     function inner() {

@@ -1,4 +1,4 @@
 () => {
-    console.log(1);
+    console.log('code3');
     console.log(a);
 }

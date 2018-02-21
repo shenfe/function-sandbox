@@ -3,16 +3,30 @@ const estraverse = require('estraverse');
 const escodegen = require('escodegen');
 const escope = require('escope');
 
-const whiteList = {
-    'console': 1
+const globalObjects = {
+    'console': 0,
+    'window': '{}',
+    'global': '{}',
+    'process': '{}',
+    'Function': 'function () {}',
+    'eval': 'function () {}'
 };
 
-const createVarDeclaration = vars => {
+const insertBefore = (arr, arr1) => {
+    arr1.reverse().forEach(item => arr.unshift(item));
+    return arr;
+};
+
+const createVarDeclaration = (vars = []) => {
+    if (!vars.length) return [];
     const code = `var ${vars.join(', ')};`;
-    return esprima.parse(code).body[0];
+    return esprima.parse(code).body;
 };
 
 const main = function (code = '', options = {}) {
+    if (typeof code === 'function') {
+        code = code.toString();
+    }
     let ast;
     try {
         ast = esprima.parse(code);
@@ -24,6 +38,8 @@ const main = function (code = '', options = {}) {
     let currentScope = scopeManager.acquire(ast);   // global scope
     let rootFunction;
     const varsThrough = {};
+
+    let patternInParam = false;
 
     estraverse.traverse(ast, {
         enter: function (node, parent) {
@@ -40,9 +56,13 @@ const main = function (code = '', options = {}) {
             if (/Function/.test(node.type)) {
                 currentScope = currentScope.upper;  // set to parent scope
                 if (currentScope.type === 'global') {
-                    currentScope.through
+                    if (rootFunction.block.params.findIndex(p => p.type.includes('Pattern')) >= 0) {
+                        patternInParam = true;
+                    }
+                    if (patternInParam) return;
+                    rootFunction.through
                         .map(id => id.identifier.name)
-                        .filter(id => !whiteList[id])
+                        .filter(id => !globalObjects.hasOwnProperty(id))
                         .forEach(id => {
                             varsThrough[id] = 1;
                         });
@@ -54,11 +74,21 @@ const main = function (code = '', options = {}) {
     });
 
     let vars = Object.keys(varsThrough);
-    vars.length && rootFunction && rootFunction.block.body.body.unshift(createVarDeclaration(vars));
-    if (rootFunction) {
-        return escodegen.generate(rootFunction.block);
+
+    let re = 'function () {}';
+
+    if (!patternInParam && rootFunction) {
+        insertBefore(rootFunction.block.body.body, createVarDeclaration(vars));
+        let globalVars = Object.keys(globalObjects)
+            .filter(k => globalObjects[k] !== 0)
+            .map(k => `${k} = ${globalObjects[k]}`);
+        re = `(function () { var ${globalVars.join(', ')}; return (${escodegen.generate(rootFunction.block)}); })()`;
     }
-    return '';
+
+    if (options === true || options.asFunction) {
+        return (new Function('return ' + re))();
+    }
+    return re;
 };
 
 module.exports = main;

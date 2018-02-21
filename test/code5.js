@@ -1,3 +1,3 @@
-async function (a = {}) {
+async function (a) {
     console.log(a);
 }
