@@ -37,7 +37,7 @@ let f1 = function () {
 };
 
 let f2 = fnsb(f1, true); // `f2` is function
-f2();
+f2(); // => undefined 1 undefined {} {}
 let f3 = fnsb(f1); // `f3` is string
 ```
 
