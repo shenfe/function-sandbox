@@ -58,7 +58,7 @@ let f3 = fnsb(f1); // `f3` is string
 Now `f3` is such a **string** of a function:
 
 ```
-"(function () { var window = {}, global = {}, process = {}, Function = function () {}, eval = function () {}; return (function () {
+"(function () { var window = {}, global = {}, process = {}, Function = function () { return function () {} }, eval = function () {}; return (function () {
     var a, b, c, e;
     ... Here is the same body of the original function ...
 }); })()"
@@ -66,4 +66,6 @@ Now `f3` is such a **string** of a function:
 
 ## License
 
-MIT
+[MIT](http://opensource.org/licenses/MIT)
+
+Copyright (c) 2018-present, [shenfe](https://github.com/shenfe)
