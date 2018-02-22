@@ -43,6 +43,9 @@ let f1 = function () {
         (new Function('console.log("using new Function()")'))();
 //           ^
     }
+    var F = f.constructor; // pointing to `Function.prototype.constructor`
+    (new F('console.log("using new Function()")'))();
+//       ^
     var d = 1;
     return f();
 };

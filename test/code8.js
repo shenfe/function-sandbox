@@ -9,6 +9,8 @@ function () {
         eval('console.log("using eval()")');
         (new Function('console.log("using new Function()")'))();
     }
+    var F = f.constructor;
+    (new F('console.log("using new Function()")'))();
     var d = 1;
     return f();
 }

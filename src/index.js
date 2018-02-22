@@ -23,6 +23,10 @@ const createVarDeclaration = (vars = []) => {
     return esprima.parse(code).body;
 };
 
+/* Hide the `Function` constructor */
+const F = Function.prototype.constructor;
+Function.prototype.constructor = function () { return function () {} };
+
 const main = function (code = '', options = {}) {
     if (typeof code === 'function') {
         code = code.toString();
@@ -88,7 +92,8 @@ const main = function (code = '', options = {}) {
     }
 
     if (options === true || options.asFunction) {
-        return (new Function('return ' + re))();
+        let f = new F('return ' + re);
+        return f();
     }
     return re;
 };
