@@ -1,6 +1,6 @@
 # function-sandbox
 
-📦 Make a sandbox for a function, blocking outer-scoped variables and dangerious operations such as `eval`, `new Function()`.
+📦 Make a sandbox for a function, blocking outer-scoped variables and dangerious operations such as `eval()` and `new Function()`.
 
 ## Input/Output
 
