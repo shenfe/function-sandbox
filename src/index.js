@@ -8,7 +8,7 @@ const globalObjects = {
     'window': '{}',
     'global': '{}',
     'process': '{}',
-    'Function': 'function () {}',
+    'Function': 'function () { return function () {} }',
     'eval': 'function () {}'
 };
 

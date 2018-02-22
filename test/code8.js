@@ -6,7 +6,8 @@ function () {
         console.log(e);
         console.log(window);
         console.log(global);
-        eval('console.log("using eval")');
+        eval('console.log("using eval()")');
+        (new Function('console.log("using new Function()")'))();
     }
     var d = 1;
     return f();
