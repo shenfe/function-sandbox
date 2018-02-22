@@ -1,6 +1,7 @@
 function () {
     a = b + 1;
     console.log(c);
+    $;
     function f() {
         console.log(d);
         console.log(e);

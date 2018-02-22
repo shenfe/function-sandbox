@@ -40,7 +40,9 @@ const result7 = fnsb(code7);
 consoleLog(result7);
 
 const code8 = readFile('code8.js');
-const result81 = fnsb(code8);
+const result81 = fnsb(code8, {
+    whiteList: [ '$' ]
+});
 consoleLog(result81);
 const result82 = fnsb(code8, true);
 result82();

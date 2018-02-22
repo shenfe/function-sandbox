@@ -22,6 +22,8 @@ $ npm install --save function-sandbox
 
 ## Usage
 
+### example
+
 ```js
 const fnsb = require('function-sandbox');
 
@@ -63,6 +65,15 @@ Now `f3` is such a **string** of a function:
     ... Here is the same body of the original function ...
 }); })()"
 ```
+
+### options
+
+The second parameter can be either Boolean or Object. When it is `true`, the main function will return a function instead of a string. When it is an object, it has several properties to be set:
+
+| property | value |
+| :---: | :--- |
+| asFunction | Boolean, whether to return a function or a string. |
+| whiteList | Array, a list of variable names not to be blocked. |
 
 ## License
 

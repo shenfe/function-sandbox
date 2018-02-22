@@ -38,6 +38,14 @@ const main = function (code = '', options = {}) {
         ast = esprima.parse('const targetFn = ' + code);
     }
 
+    if (!options) options = {};
+    const whiteList = {};
+    if (typeof options === 'object' && Array.isArray(options.whiteList)) {
+        options.whiteList.forEach(x => {
+            whiteList[x] = 1;
+        });
+    }
+
     const scopeManager = escope.analyze(ast, {
         ignoreEval: true
     });
@@ -68,7 +76,7 @@ const main = function (code = '', options = {}) {
                     if (patternInParam) return;
                     rootFunction.through
                         .map(id => id.identifier.name)
-                        .filter(id => !globalObjects.hasOwnProperty(id))
+                        .filter(id => !globalObjects.hasOwnProperty(id) && !whiteList.hasOwnProperty(id))
                         .forEach(id => {
                             varsThrough[id] = 1;
                         });
