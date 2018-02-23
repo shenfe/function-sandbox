@@ -85,4 +85,4 @@ The second parameter can be either Boolean or Object. When it is `true`, the mai
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2018-present, [shenfe](https://github.com/shenfe)
+Copyright © 2018-present, [shenfe](https://github.com/shenfe)
