@@ -1,8 +1,6 @@
-# function-sandbox
+# function-sandbox <a href="https://www.npmjs.com/package/function-sandbox"><img src="https://img.shields.io/npm/v/function-sandbox.svg"></a>
 
-<a href="https://www.npmjs.com/package/function-sandbox"><img src="https://img.shields.io/npm/v/function-sandbox.svg"></a>
-
-📦 Make a sandbox for a function, blocking outer-scoped variables and dangerious operations such as `eval()` and `new Function()`.
+📦 Make a sandbox for a function, blocking outer-scoped variables (e.g. `window`, `global`) and dangerious operations (e.g. `eval()`, `new Function()`).
 
 ## Input/Output
 
