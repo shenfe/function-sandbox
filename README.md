@@ -62,14 +62,11 @@ let f3 = fnsb(f1);          // `f3` is string
 Now `f3` is such a **string** of a function:
 
 ```
-"function (b) {
-    var window = {}, global = {}, process = {}, Function = function () {
-            return function () {
-            };
-        }, eval = function () {
-        }, a, c, e;
-    ... Here is the same body of the original function ...
-}"
+"function () { var window = {}, global = {}, process = {}, Function = function () { return function () {} }, eval = function () {}; return (function (b) {
+    'use strict';
+    var a, c, e;
+    ... Here is the original function body ...
+}).apply(null, arguments); }"
 ```
 
 ### options
@@ -84,6 +81,7 @@ The second parameter can be either Boolean or Object. When it is `true`, the mai
 ## More
 
 * The [Function](http://www.ecma-international.org/ecma-262/5.1/#sec-15.3.2) in JavaScript.
+* Node.js [vm](https://nodejs.org/api/vm.html).
 
 ## License
 

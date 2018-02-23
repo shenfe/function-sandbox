@@ -19,7 +19,7 @@ const insertBefore = (arr, arr1) => {
 
 const createVarDeclaration = (vars = []) => {
     if (!vars.length) return [];
-    const code = `var ${vars.join(', ')};`;
+    const code = `'use strict'; var ${vars.join(', ')};`;
     return esprima.parse(code).body;
 };
 
@@ -88,14 +88,14 @@ const main = function (code = '', options = {}) {
     let re = 'function () {}';
 
     if (!patternInParam && rootFunction) {
-        insertBefore(rootFunction.block.body.body, createVarDeclaration([
-            ...Object.keys(globalObjects)
-                .filter(k => globalObjects[k] !== 0)
-                .map(k => `${k} = ${globalObjects[k]}`),
-            ...Object.keys(varsThrough)
-        ]));
+        insertBefore(rootFunction.block.body.body, createVarDeclaration(Object.keys(varsThrough)));
 
-        re = escodegen.generate(rootFunction.block);
+        re = `function () { var ${
+            Object.keys(globalObjects)
+                .filter(k => globalObjects[k] !== 0)
+                .map(k => `${k} = ${globalObjects[k]}`)
+                .join(', ')
+        }; return (${escodegen.generate(rootFunction.block)}).apply(null, arguments); }`;
     }
 
     if (options === true || options.asFunction) {
