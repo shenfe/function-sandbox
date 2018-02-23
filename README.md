@@ -75,6 +75,10 @@ The second parameter can be either Boolean or Object. When it is `true`, the mai
 | asFunction | Boolean, whether to return a function or a string. |
 | whiteList | Array, a list of variable names not to be blocked. |
 
+## More
+
+* The [Function](http://www.ecma-international.org/ecma-262/5.1/#sec-15.3.2) in JavaScript.
+
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
