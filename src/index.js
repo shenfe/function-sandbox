@@ -24,7 +24,7 @@ const createVarDeclaration = (vars = []) => {
 };
 
 /* Hide the `Function` constructor */
-const F = Function.prototype.constructor;
+Function = Function.prototype.constructor;
 Function.prototype.constructor = function () { return function () {} };
 
 const main = function (code = '', options = {}) {
@@ -100,7 +100,7 @@ const main = function (code = '', options = {}) {
     }
 
     if (options === true || options.asFunction) {
-        let f = new F('return ' + re);
+        let f = new Function('return ' + re);
         return f();
     }
     return re;
