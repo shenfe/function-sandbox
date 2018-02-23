@@ -27,9 +27,9 @@ $ npm install --save function-sandbox
 ```js
 const fnsb = require('function-sandbox');
 
-let f1 = function () {
+let f1 = function (b) {
     a = b + 1;
-//  ^   ^
+//  ^
     console.log(c);
 //              ^
     function f() {
@@ -60,10 +60,14 @@ let f3 = fnsb(f1); // `f3` is string
 Now `f3` is such a **string** of a function:
 
 ```
-"(function () { var window = {}, global = {}, process = {}, Function = function () { return function () {} }, eval = function () {}; return (function () {
-    var a, b, c, e;
+"function (b) {
+    var window = {}, global = {}, process = {}, Function = function () {
+            return function () {
+            };
+        }, eval = function () {
+        }, a, c, e;
     ... Here is the same body of the original function ...
-}); })()"
+}"
 ```
 
 ### options

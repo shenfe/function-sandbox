@@ -1,4 +1,4 @@
-function () {
+function (b) {
     a = b + 1;
     console.log(c);
     $;

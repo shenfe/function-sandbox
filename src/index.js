@@ -92,16 +92,17 @@ const main = function (code = '', options = {}) {
     let re = 'function () {}';
 
     if (!patternInParam && rootFunction) {
-        insertBefore(rootFunction.block.body.body, createVarDeclaration(vars));
-        let globalVars = Object.keys(globalObjects)
+        const globalVars = Object.keys(globalObjects)
             .filter(k => globalObjects[k] !== 0)
             .map(k => `${k} = ${globalObjects[k]}`);
-        re = `(function () { var ${globalVars.join(', ')}; return (${escodegen.generate(rootFunction.block)}); })()`;
+
+        insertBefore(rootFunction.block.body.body, createVarDeclaration([...globalVars, ...vars]));
+
+        re = escodegen.generate(rootFunction.block);
     }
 
     if (options === true || options.asFunction) {
-        let f = new Function('return ' + re);
-        return f();
+        return (new Function('return ' + re))();
     }
     return re;
 };
