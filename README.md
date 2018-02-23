@@ -25,9 +25,11 @@ $ npm install --save function-sandbox
 ```js
 const fnsb = require('function-sandbox');
 
+let a = 1;
+
 let f1 = function (b) {
-    a = b + 1;
-//  ^
+    console.log(a = b + 1);
+//              ^
     console.log(c);
 //              ^
     function f() {
@@ -43,16 +45,18 @@ let f1 = function (b) {
         (new Function('console.log("using new Function()")'))();
 //           ^
     }
-    var F = f.constructor; // pointing to `Function.prototype.constructor`
+    var F = f.constructor;
     (new F('console.log("using new Function()")'))();
 //       ^
     var d = 1;
     return f();
 };
 
-let f2 = fnsb(f1, true); // `f2` is function
-f2(); // => undefined 1 undefined {} {}
-let f3 = fnsb(f1); // `f3` is string
+let f2 = fnsb(f1, true);    // `f2` is function
+f2(1);                      // => 2 undefined 1 undefined {} {}
+console.log(a);             // => 1
+
+let f3 = fnsb(f1);          // `f3` is string
 ```
 
 Now `f3` is such a **string** of a function:
