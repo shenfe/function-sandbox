@@ -49,7 +49,7 @@ const main = function (code = '', options = {}) {
     const scopeManager = escope.analyze(ast, {
         ignoreEval: true
     });
-    let currentScope = scopeManager.acquire(ast);   // global scope
+    let currentScope = scopeManager.acquire(ast); // global scope
     let rootFunction;
     const varsThrough = {};
 
@@ -58,9 +58,8 @@ const main = function (code = '', options = {}) {
     estraverse.traverse(ast, {
         enter: function (node, parent) {
             // do stuff
-
             if (/Function/.test(node.type)) {
-                currentScope = scopeManager.acquire(node);  // get current function scope
+                currentScope = scopeManager.acquire(node); // get current function scope
                 if (!rootFunction) {
                     rootFunction = currentScope;
                 }
@@ -68,7 +67,7 @@ const main = function (code = '', options = {}) {
         },
         leave: function (node, parent) {
             if (/Function/.test(node.type)) {
-                currentScope = currentScope.upper;  // set to parent scope
+                currentScope = currentScope.upper; // set to parent scope
                 if (currentScope.type === 'global') {
                     if (rootFunction.block.params.findIndex(p => p.type.includes('Pattern')) >= 0) {
                         patternInParam = true;
@@ -82,21 +81,19 @@ const main = function (code = '', options = {}) {
                         });
                 }
             }
-
             // do stuff
         }
     });
 
-    let vars = Object.keys(varsThrough);
-
     let re = 'function () {}';
 
     if (!patternInParam && rootFunction) {
-        const globalVars = Object.keys(globalObjects)
-            .filter(k => globalObjects[k] !== 0)
-            .map(k => `${k} = ${globalObjects[k]}`);
-
-        insertBefore(rootFunction.block.body.body, createVarDeclaration([...globalVars, ...vars]));
+        insertBefore(rootFunction.block.body.body, createVarDeclaration([
+            ...Object.keys(globalObjects)
+                .filter(k => globalObjects[k] !== 0)
+                .map(k => `${k} = ${globalObjects[k]}`),
+            ...Object.keys(varsThrough)
+        ]));
 
         re = escodegen.generate(rootFunction.block);
     }
