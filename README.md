@@ -84,6 +84,7 @@ The second parameter can be either Boolean or Object. When it is `true`, the mai
 
 * The [Function](http://www.ecma-international.org/ecma-262/5.1/#sec-15.3.2) in JavaScript.
 * Node.js [vm](https://nodejs.org/api/vm.html).
+* [Web Worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API).
 
 ## License
 
