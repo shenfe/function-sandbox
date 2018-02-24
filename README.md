@@ -73,7 +73,7 @@ Now `f3` is such a **string** of a function:
 
 ### options
 
-The second parameter can be either Boolean or Object. When it is `true`, the main function will return a function instead of a string. When it is an object, it has several properties to be set:
+The second parameter is optional and can be either Boolean or Object. When it is `true`, the main function will return a function instead of a string. When it is an object, it has several properties to be set:
 
 | property | value | example |
 | :---: | :--- | :---: |
