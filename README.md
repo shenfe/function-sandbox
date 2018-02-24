@@ -1,14 +1,16 @@
 # function-sandbox <a href="https://www.npmjs.com/package/function-sandbox"><img src="https://img.shields.io/npm/v/function-sandbox.svg"></a>
 
-📦 Make a sandbox for a function, blocking outer-scoped variables (e.g. `window`, `global`) and dangerious operations (e.g. `eval()`, `new Function()`).
+📦 Make a sandbox for a function, **isolating the function's effects**, **blocking outer-scoped variables** (e.g. `window`, `global`) **and dangerious operations** (e.g. `eval()`, `new Function()`).
+
+All the module exports is a main function.
 
 ## Input/Output
 
-### input
+### input (parameter)
 
 A function or string of a function.
 
-### output
+### output (return)
 
 A function or string of a function.
 
@@ -73,12 +75,12 @@ Now `f3` is such a **string** of a function:
 
 The second parameter can be either Boolean or Object. When it is `true`, the main function will return a function instead of a string. When it is an object, it has several properties to be set:
 
-| property | value |
-| :---: | :--- |
-| asFunction | Boolean, whether to return a function or a string. |
-| whiteList | Array, a list of variable names not to be blocked. |
+| property | value | example |
+| :---: | :--- | :---: |
+| asFunction | Boolean, whether to return a function or a string. | `true` |
+| whiteList | Array, a list of variable names not to be blocked. | `['$']` `['Promise']` |
 
-## More
+## More Related
 
 * The [Function](http://www.ecma-international.org/ecma-262/5.1/#sec-15.3.2) in JavaScript.
 * Node.js [vm](https://nodejs.org/api/vm.html).
