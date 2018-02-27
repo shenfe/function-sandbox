@@ -5,6 +5,17 @@ const escope = require('escope');
 
 const globalObjects = {
     'console': 0,
+    'setTimeout': 0,
+    'setInterval': 0,
+    'Object': 0,
+    'Boolean': 0,
+    'String': 0,
+    'Number': 0,
+    'Date': 0,
+    'parseInt': 0,
+    'parseFloat': 0,
+    'Math': 0,
+    'Promise': 0,
     'window': '{}',
     'global': '{}',
     'process': '{}',
