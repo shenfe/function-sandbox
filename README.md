@@ -78,7 +78,8 @@ The second parameter can be either Boolean or Object. When it is `true`, the mai
 | property | value | example |
 | :---: | :--- | :---: |
 | asFunction | Boolean, whether to return a function or a string. | `true` |
-| whiteList | Array, a list of variable names not to be blocked. | `['$']` `['Promise']` |
+| whiteList | Array, a list of variable names not to be blocked. | `['$']` `['Promise', 'JSON']` |
+| injection | Object, a map from variable name to value. | `{ a: 1, b: function (x) { return x * x; } }` |
 
 ## More Related
 

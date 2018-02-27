@@ -23,6 +23,31 @@ const createVarDeclaration = (vars = []) => {
     return esprima.parse(code).body;
 };
 
+const ObjectStringify = obj => {
+    switch (Object.prototype.toString.call(obj)) {
+    case '[object Function]':
+    case '[object AsyncFunction]':
+    case '[object GeneratorFunction]':
+        return main(obj.toString());
+
+    case '[object Object]':
+        let p = [];
+
+        for (let i in obj) {
+            if (!obj.hasOwnProperty(i)) continue;
+            p.push([i, ObjectStringify(obj[i])]);
+        }
+
+        return '{' + p.map(v => `${JSON.stringify(v[0])}:${v[1]}`).join(',') + '}';
+
+    case '[object Array]':
+        return '[' + obj.map(ObjectStringify).join(',') + ']';
+
+    default:
+        return JSON.stringify(obj);
+    }
+};
+
 /* Hide the `Function` constructor */
 Function = Function.prototype.constructor;
 Function.prototype.constructor = function () { return function () {} };
@@ -40,10 +65,16 @@ const main = function (code = '', options = {}) {
 
     if (!options) options = {};
     const whiteList = {};
-    if (typeof options === 'object' && Array.isArray(options.whiteList)) {
-        options.whiteList.forEach(x => {
-            whiteList[x] = 1;
-        });
+    const injection = {};
+    if (typeof options === 'object') {
+        if (Array.isArray(options.whiteList)) {
+            options.whiteList.forEach(x => {
+                whiteList[x] = 1;
+            });
+        }
+        if (typeof options.injection === 'object' && options.injection) {
+            Object.assign(injection, options.injection);
+        }
     }
 
     const scopeManager = escope.analyze(ast, {
@@ -75,7 +106,7 @@ const main = function (code = '', options = {}) {
                     if (patternInParam) return;
                     rootFunction.through
                         .map(id => id.identifier.name)
-                        .filter(id => !globalObjects.hasOwnProperty(id) && !whiteList.hasOwnProperty(id))
+                        .filter(id => !globalObjects.hasOwnProperty(id) && !whiteList.hasOwnProperty(id) && !injection.hasOwnProperty(id))
                         .forEach(id => {
                             varsThrough[id] = 1;
                         });
@@ -94,6 +125,9 @@ const main = function (code = '', options = {}) {
             Object.keys(globalObjects)
                 .filter(k => globalObjects[k] !== 0)
                 .map(k => `${k} = ${globalObjects[k]}`)
+                .concat(Object.keys(injection).filter(k => /^[a-zA-Z$_]+[0-9a-zA-Z$_]*$/.test(k)).map(k => {
+                    return `${k} = ${ObjectStringify(injection[k])}`;
+                }))
                 .join(', ')
         }; return (${escodegen.generate(rootFunction.block)}).apply(null, arguments); }`;
     }
