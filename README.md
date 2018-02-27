@@ -73,7 +73,7 @@ Now `f3` is such a **string** of a function:
 
 ### options
 
-The second parameter can be either Boolean or Object. When it is `true`, the main function will return a function instead of a string. When it is an object, it has several properties to be set:
+The second parameter is optional and can be either Boolean or Object. When it is `true`, the main function will return a function instead of a string. When it is an object, it has several properties to be set:
 
 | property | value | example |
 | :---: | :--- | :---: |
@@ -85,6 +85,7 @@ The second parameter can be either Boolean or Object. When it is `true`, the mai
 
 * The [Function](http://www.ecma-international.org/ecma-262/5.1/#sec-15.3.2) in JavaScript.
 * Node.js [vm](https://nodejs.org/api/vm.html).
+* [Web Worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API).
 
 ## License
 
