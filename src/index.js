@@ -20,7 +20,7 @@ const globalObjects = {
     'global': '{}',
     'process': '{}',
     'Function': 'function () { return function () {} }',
-    'eval': 'function () {}'
+    // 'eval': 'function () {}'
 };
 
 const insertBefore = (arr, arr1) => {
