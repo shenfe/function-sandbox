@@ -1,5 +1,7 @@
 # function-sandbox <a href="https://www.npmjs.com/package/function-sandbox"><img src="https://img.shields.io/npm/v/function-sandbox.svg"></a>
 
+<img align="right" height="128" src="https://raw.githubusercontent.com/shenfe/function-sandbox/master/readme_assets/figure-before.png">
+
 📦 Make a sandbox for a function, **isolating the function's effects**, **blocking outer-scoped variables** (e.g. `window`, `global`) **and dangerious operations** (e.g. `eval()`, `new Function()`).
 
 All the module exports is a main function.
